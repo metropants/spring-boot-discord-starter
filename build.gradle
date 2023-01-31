@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'maven-publish'
+}
+
+group = 'xyz.metropants'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation ('net.dv8tion:JDA:5.0.0-beta.3') {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+
+    compileOnly 'org.springframework.boot:spring-boot-starter:3.0.2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set(project.name)
+    archiveClassifier.set('')
+    archiveVersion.set(this.version)
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = this.group
+            artifactId = project.name
+            version = this.version
+            from components.java
+        }
+    }
+}
