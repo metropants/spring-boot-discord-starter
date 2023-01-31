@@ -31,6 +31,11 @@ Using maven:
 ```
 
 # Usage
+Setting the bot token in the application.properties file.
+```properties
+discord.bot.token=bot-token
+```
+
 Usage without a custom JDA configuration:
 ```java
 @Configuration
