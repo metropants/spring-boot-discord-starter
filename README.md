@@ -45,7 +45,7 @@ public class DiscordConfig {
 }
 ```
 
-Usage with a custom JDA configuratio:
+Usage with a custom JDA configuration:
 ```java
 @Configuration
 @EnableDiscord
